@@ -1,0 +1,63 @@
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    id "dev.flutter.flutter-gradle-plugin"
+}
+
+android {
+    namespace = "com.example.flavor_app"
+    compileSdk = flutter.compileSdkVersion
+    ndkVersion = flutter.ndkVersion
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        applicationId = "com.example.flavor_app"
+        minSdk = flutter.minSdkVersion
+        targetSdk = flutter.targetSdkVersion
+        versionCode = flutter.versionCode
+        versionName = flutter.versionName
+    }
+
+    flavorDimensions "app"
+    productFlavors {
+        customer {
+            dimension "app"
+            applicationIdSuffix ".customer"
+            resValue "string", "app_name", "Customer App"
+            // For customer flavor's icon
+            resValue "mipmap", "ic_launcher", "@mipmap/ic_launcher_customer"
+        }
+        vendor {
+            dimension "app"
+            applicationIdSuffix ".vendor"
+            resValue "string", "app_name", "Vendor App"
+            // For vendor flavor's icon
+            resValue "mipmap", "ic_launcher", "@mipmap/ic_launcher_vendor"
+        }
+        delivery {
+            dimension "app"
+            applicationIdSuffix ".delivery"
+            resValue "string", "app_name", "Delivery App"
+            // For delivery flavor's icon
+            resValue "mipmap", "ic_launcher", "@mipmap/ic_launcher_delivery"
+        }
+    }
+
+    buildTypes {
+        release {
+            signingConfig = signingConfigs.debug
+        }
+    }
+}
+
+flutter {
+    source = "../.."
+}
